@@ -1,3 +1,4 @@
-#pragma once 
+#pragma once
 
-#include "string_alg.hpp"
+#include "string_alg.h"
+#include "version.hpp"
