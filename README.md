@@ -1,0 +1,1 @@
+# tadus_linux_study
