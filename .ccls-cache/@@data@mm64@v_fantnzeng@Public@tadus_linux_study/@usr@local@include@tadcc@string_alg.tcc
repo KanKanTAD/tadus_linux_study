@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cctype>
 #include <regex>
 
 namespace tadcc {
@@ -9,12 +10,11 @@ static inline bool chr_in_str(char c, const std::string &s) {
   return s.find(c) != s.npos;
 }
 
-void trim(std::string &cont__, const std::string &s) {
-  rtrim(cont__, s);
-  ltrim(cont__, s);
+std::string &trim(std::string &cont__, const std::string &s) {
+  return ltrim(rtrim(cont__, s), s);
 }
 
-void rtrim(std::string &cont__, const std::string &s) {
+std::string &rtrim(std::string &cont__, const std::string &s) {
   while (!cont__.empty()) {
     if (chr_in_str(cont__.back(), s)) {
       cont__.pop_back();
@@ -22,30 +22,29 @@ void rtrim(std::string &cont__, const std::string &s) {
       break;
     }
   }
+  return cont__;
 }
 
-void ltrim(std::string &cont__, const std::string &s) {
+std::string &ltrim(std::string &cont__, const std::string &s) {
   std::reverse(cont__.begin(), cont__.end());
   rtrim(cont__, s);
   std::reverse(cont__.begin(), cont__.end());
+  return cont__;
 }
 
 std::string strip(const std::string &cont__, const std::string &s) {
   auto res = cont__;
-  trim(res);
-  return res;
+  return trim(res);
 }
 
 std::string rstrip(const std::string &cont__, const std::string &s) {
   auto res = cont__;
-  rtrim(res);
-  return res;
+  return rtrim(res);
 }
 
 std::string lstrip(const std::string &cont__, const std::string &s) {
   auto res = cont__;
-  ltrim(res);
-  return res;
+  return ltrim(res);
 }
 
 void pattern_split(const std::string &master__, const std::string &pattern,
@@ -111,10 +110,11 @@ void str_join(const std::string &seq, const std::vector<Ty> &vk,
   str_join(seq, vk.begin(), vk.end(), result);
 }
 
-void str_upper(std::string &s) {
+std::string &str_upper(std::string &s) {
   for (auto &c : s) {
     c = std::toupper(c);
   }
+  return s;
 }
 
 void str_upper(const std::string &s, std::string &result) {
@@ -122,9 +122,25 @@ void str_upper(const std::string &s, std::string &result) {
   str_upper(result);
 }
 
-std::string str_upper(const std::string &s) {
+std::string strUpper(const std::string &s) {
   auto res = s;
   str_upper(res);
+  return res;
+}
+
+std::string &str_lower(std::string &s) {
+  for (auto &c : s) {
+    c = std::tolower(c);
+  }
+  return s;
+}
+void str_lower(const std::string &s, std::string &result) {
+  result = s;
+  str_lower(result);
+}
+std::string strLower(const std::string &s) {
+  auto res = s;
+  str_lower(res);
   return res;
 }
 
