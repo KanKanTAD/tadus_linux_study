@@ -1,19 +1,52 @@
-/***
- * 03 45 12 78 01 09 02         | len=7
- * [<03> 45 12 (78) 01 09 02]   | deta= 7 >> 1 = 3 ; i=3
- * [03 <45> 12 78 (01) 09 02]   | deta= 7 >> 1 = 3   ; i=4
- * [03 <01> 12 78 (45) 09 02]   | deta= 7 >> 1 = 3   ; i=4
- * [03 01 <12> 78 45 (09) 02]   | deta= 7 >> 1 = 3   ; i=5
- * [03 01 <09> 78 45 (12) 02]   | deta= 7 >> 1 = 3   ; i=5
- * [03 01 09 <78> 45 12 (02)]   | deta= 7 >> 1 = 3   ; i=6
- * [03 01 09 <02> 45 12 (78)]   | deta= 7 >> 1 = 3   ; i=6
- * [<03> (01) 09 02 45 12 78]   | deta= 3 >> 1 = 1   ; i=1
- * [<01> (03) 09 02 45 12 78]   | deta= 3 >> 1 = 1   ; i=1
- * [01 <03> (09) 02 45 12 78]   | deta= 3 >> 1 = 1   ; i=2
- * [01 03 <09> (02) 45 12 78]   | deta= 3 >> 1 = 1   ; i=3
- * [01 <03> 02 (09) 45 12 78]   | deta= 3 >> 1 = 1   ; i=3
- * [<01> 02 03 (09) 45 12 78]   | deta= 3 >> 1 = 1   ; i=3
- */
-template <typename ItTy>
-void shell_sort(const ItTy &begin_, const ItTy &end__) {}
-int main() { return 0; }
+#include <iostream>
+#include <iterator>
+#include <vector>
+using namespace std;
+
+template <typename ItTp> void shell_sort(ItTp &beg__, ItTp &end__) {
+  const auto len_ = std::distance(beg__, end__);
+  for (auto gap = len_ / 2; gap > 0; gap /= 2) {
+    for (auto it = beg__ + gap; it != end__; it++) {
+		auto temp = *it;
+		for(auto jt)
+
+    }
+  }
+}
+
+/* function to sort arr using shellSort */
+int shellSort(int arr[], int n) {
+  // Start with a big gap, then reduce the gap
+  for (int gap = n / 2; gap > 0; gap /= 2) {
+    // Do a gapped insertion sort for this gap size.
+    // The first gap elements a[0..gap-1] are already in gapped order
+    // keep adding one more element until the entire array is
+    // gap sorted
+    for (int i = gap; i < n; i += 1) {
+      // add a[i] to the elements that have been gap sorted
+      // save a[i] in temp and make a hole at position i
+      int temp = arr[i];
+
+      // shift earlier gap-sorted elements up until the correct
+      // location for a[i] is found
+      int j;
+      for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+        arr[j] = arr[j - gap];
+
+      // put temp (the original a[i]) in its correct location
+      arr[j] = temp;
+    }
+  }
+  return 0;
+}
+
+void printArray(int arr[], int n) {
+  for (int i = 0; i < n; i++)
+    cout << arr[i] << " ";
+}
+
+int main() {
+  std::vector<int> vk{1, 2, 3, 4, 5, 6};
+  printf("%d\n", std::distance(vk.begin(), vk.end()));
+  return 0;
+}

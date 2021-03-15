@@ -10,3 +10,12 @@ insert_sort.exe: insert_sorted.cc
 
 sort_stability.exe: sort_stability.cc
 	$(cc) -o $@ $<
+
+shell_sort.exe:shell_sort.cc
+	$(cc) -o $@ $<
+
+heap_sorted.exe:heap_sorted.cc
+	$(cc) -o $@ $<
+
+clean:
+	rm *.exe

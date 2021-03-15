@@ -2,12 +2,23 @@
 #include <iostream>
 #include <iterator>
 #include <tadcc/string_alg.h>
-#include <tadcc/tadcc.hpp>
 #include <vector>
 
 template <typename Tp> inline static void show_arr(const std::vector<Tp> &vk) {
   std::copy(vk.begin(), vk.end(), std::ostream_iterator<int>(std::cout, ","));
   std::cout << std::endl;
+}
+template <typename ItTp> void insert_sort(ItTp beg__, ItTp end__) {
+  auto len_ = std::distance(beg__, end__);
+  auto last_ = beg__ + len_ - 1;
+  for (auto it = last_ - 1; it != beg__; it--) {
+    auto tag = *it;
+    auto jt = it + 1;
+    for (; jt != end__ && tag > *jt; jt++) {
+      *(jt - 1) = *jt;
+    }
+    *(jt - 1) = tag;
+  }
 }
 
 template <typename Tp> void insert_sort(std::vector<Tp> &vk) {
@@ -29,7 +40,7 @@ int main(int argc, char **argv) {
   std::vector<int> vk;
   std::transform(result.begin(), result.end(), std::back_inserter(vk),
                  [](const std::string &v) { return std::stoi(v); });
-  insert_sort(vk);
+  insert_sort(vk.begin(), vk.end());
   show_arr(vk);
   return 0;
 }
